@@ -1,0 +1,27 @@
+This is a fairly straightforward port of gl-matrix.js (https://github.com/toji/gl-matrix)
+from JavaScript to C.
+
+To compile and install on UNIX systems, run from your terminal:
+
+    make
+    sudo make install
+
+The library will be installed under /usr/local/lib and the headers at 
+/usr/local/include. If you need to install it elsewhere, just edit the Makefile.
+
+To use the library after installation, include the gl-matrix.h file:
+
+    #include <gl-matrix.h>
+
+And use the -lgl-matrix flag on your compiler:
+
+    clang -lgl-matrix main.c 
+
+If you want to include this library directly in your IDE project (it's probably
+the easiest way to get this working on Windows w/ Visual Studio) you can simply
+copy all the .c and .h files to your project directory, and add them normally.
+
+Known issues:
+
+- The documentation still uses some JavaScript nomenclature from the original 
+version of the library.
