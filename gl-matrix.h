@@ -128,7 +128,7 @@ vec3_t vec3_negate(vec3_t vec, vec3_t dest);
 vec3_t vec3_scale(vec3_t vec, double val, vec3_t dest);
 
 /*
- * vec3.normalize
+ * vec3_normalize
  * Generates a unit vector of the same direction as the provided vec3
  * If vector length is 0, returns [0, 0, 0]
  *
@@ -156,7 +156,7 @@ vec3_t vec3_normalize(vec3_t vec, vec3_t dest);
 vec3_t vec3_cross (vec3_t vec, vec3_t vec2, vec3_t dest);
 
 /*
- * vec3.length
+ * vec3_length
  * Caclulates the length of a vec3
  *
  * Params:
@@ -195,7 +195,7 @@ double vec3_dot(vec3_t vec, vec3_t vec2);
 vec3_t vec3_direction (vec3_t vec, vec3_t vec2, vec3_t dest);
 
 /*
- * vec3.lerp
+ * vec3_lerp
  * Performs a linear interpolation between two vec3
  *
  * Params:
@@ -211,7 +211,7 @@ vec3_t vec3_direction (vec3_t vec, vec3_t vec2, vec3_t dest);
 vec3_t vec3_lerp(vec3_t vec, vec3_t vec2, double lerp, vec3_t dest);
 
 /*
- * vec3.dist
+ * vec3_dist
  * Calculates the euclidian distance between two vec3
  *
  * Params:
@@ -242,7 +242,7 @@ double vec3_dist(vec3_t vec, vec3_t vec2);
 vec3_t vec3_unproject(vec3_t vec, mat4_t view, mat4_t proj, vec4_t viewport, vec3_t dest);
 
 /*
- * vec3.str
+ * vec3_str
  * Writes a string representation of a vector
  *
  * Params:
@@ -320,7 +320,7 @@ mat3_t mat3_transpose(mat3_t mat, mat3_t dest);
 mat4_t mat3_toMat4(mat3_t mat, mat4_t dest);
 
 /*
- * mat3.str
+ * mat3_str
  * Writes a string representation of a mat3
  *
  * Params:
@@ -334,7 +334,7 @@ void mat3_str(mat3_t mat, char *buffer);
  */
 
 /*
- * mat4.create
+ * mat4_create
  * Creates a new instance of a mat4_t
  *
  * Params:
@@ -346,7 +346,7 @@ void mat3_str(mat3_t mat, char *buffer);
 mat4_t mat4_create(mat4_t mat);
 
 /*
- * mat4.set
+ * mat4_set
  * Copies the values of one mat4_t to another
  *
  * Params:
@@ -371,7 +371,7 @@ mat4_t mat4_set(mat4_t mat, mat4_t dest);
 mat4_t mat4_identity(mat4_t dest);
      
 /*
- * mat4.transpose
+ * mat4_transpose
  * Transposes a mat4_t (flips the values over the diagonal)
  *
  * Params:
@@ -384,7 +384,7 @@ mat4_t mat4_identity(mat4_t dest);
 mat4_t mat4_transpose(mat4_t mat, mat4_t dest);
 
 /*
- * mat4.determinant
+ * mat4_determinant
  * Calculates the determinant of a mat4
  *
  * Params:
@@ -409,7 +409,7 @@ double mat4_determinant(mat4_t mat);
 mat4_t mat4_inverse(mat4_t mat, mat4_t dest);
 
 /*
- * mat4.toRotationMat
+ * mat4_toRotationMat
  * Copies the upper 3x3 elements of a mat4_t into another mat4
  *
  * Params:
@@ -422,7 +422,7 @@ mat4_t mat4_inverse(mat4_t mat, mat4_t dest);
 mat4_t mat4_toRotationMat(mat4_t mat, mat4_t dest);
 
 /*
- * mat4.toMat3
+ * mat4_toMat3
  * Copies the upper 3x3 elements of a mat4_t into a mat3
  *
  * Params:
@@ -435,7 +435,7 @@ mat4_t mat4_toRotationMat(mat4_t mat, mat4_t dest);
 mat3_t mat4_toMat3(mat4_t mat, mat3_t dest);
 
 /*
- * mat4.toInverseMat3
+ * mat4_toInverseMat3
  * Calculates the inverse of the upper 3x3 elements of a mat4_t and copies the result into a mat3
  * The resulting matrix is useful for calculating transformed normals
  *
@@ -449,7 +449,7 @@ mat3_t mat4_toMat3(mat4_t mat, mat3_t dest);
 mat3_t mat4_toInverseMat3(mat4_t mat, mat3_t dest);
 
 /*
- * mat4.multiply
+ * mat4_multiply
  * Performs a matrix multiplication
  *
  * Params:
@@ -463,7 +463,7 @@ mat3_t mat4_toInverseMat3(mat4_t mat, mat3_t dest);
 mat4_t mat4_multiply(mat4_t mat, mat4_t mat2, mat4_t dest);
 
 /*
- * mat4.multiplyVec3
+ * mat4_multiplyVec3
  * Transforms a vec3_t with the given matrix
  * 4th vector component is implicitly '1'
  *
@@ -506,7 +506,7 @@ mat4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, mat4_t dest);
 mat4_t mat4_translate(mat4_t mat, vec3_t vec, mat4_t dest);
 
 /*
- * mat4.scale
+ * mat4_scale
  * Scales a matrix by the given vector
  *
  * Params:
@@ -536,7 +536,7 @@ mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest);
 mat4_t mat4_rotate(mat4_t mat, double angle, vec3_t axis, mat4_t dest);
 
 /*
- * mat4.rotateX
+ * mat4_rotateX
  * Rotates a matrix by the given angle around the X axis
  *
  * Params:
@@ -550,7 +550,7 @@ mat4_t mat4_rotate(mat4_t mat, double angle, vec3_t axis, mat4_t dest);
 mat4_t mat4_rotateX(mat4_t mat, double angle, mat4_t dest);
 
 /*
- * mat4.rotateY
+ * mat4_rotateY
  * Rotates a matrix by the given angle around the Y axis
  *
  * Params:
@@ -564,7 +564,7 @@ mat4_t mat4_rotateX(mat4_t mat, double angle, mat4_t dest);
 mat4_t mat4_rotateY(mat4_t mat, double angle, mat4_t dest);
 
 /*
- * mat4.rotateZ
+ * mat4_rotateZ
  * Rotates a matrix by the given angle around the Z axis
  *
  * Params:
@@ -578,7 +578,7 @@ mat4_t mat4_rotateY(mat4_t mat, double angle, mat4_t dest);
 mat4_t mat4_rotateZ(mat4_t mat, double angle, mat4_t dest);
 
 /*
- * mat4.frustum
+ * mat4_frustum
  * Generates a frustum matrix with the given bounds
  *
  * Params:
@@ -593,7 +593,7 @@ mat4_t mat4_rotateZ(mat4_t mat, double angle, mat4_t dest);
 mat4_t mat4_frustum(double left, double right, double bottom, double top, double near, double far, mat4_t dest);
 
 /*
- * mat4.perspective
+ * mat4_perspective
  * Generates a perspective projection matrix with the given bounds
  *
  * Params:
@@ -608,7 +608,7 @@ mat4_t mat4_frustum(double left, double right, double bottom, double top, double
 mat4_t mat4_perspective(double fovy, double aspect, double near, double far, mat4_t dest);
 
 /*
- * mat4.ortho
+ * mat4_ortho
  * Generates a orthogonal projection matrix with the given bounds
  *
  * Params:
@@ -623,7 +623,7 @@ mat4_t mat4_perspective(double fovy, double aspect, double near, double far, mat
 mat4_t mat4_ortho(double left, double right, double bottom, double top, double near, double far, mat4_t dest);
 
 /*
- * mat4.lookAt
+ * mat4_lookAt
  * Generates a look-at matrix with the given eye position, focal point, and up axis
  *
  * Params:
@@ -659,7 +659,7 @@ mat4_t mat4_lookAt(vec3_t eye, vec3_t center, vec3_t up, mat4_t dest);
 mat4_t mat4_fromRotationTranslation(quat_t quat, vec3_t vec, mat4_t dest);
 
 /*
- * mat4.str
+ * mat4_str
  * Writes a string representation of a mat4
  *
  * Params:
@@ -713,6 +713,7 @@ quat_t quat_set(quat_t quat, quat_t dest);
 quat_t quat_calculateW(quat_t quat, quat_t dest);
 
 /**
+ * quat_dot
  * Calculates the dot product of two quaternions
  *
  * @param {quat4} quat First operand
