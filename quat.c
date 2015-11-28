@@ -29,13 +29,13 @@ quat_t quat_calculateW(quat_t quat, quat_t dest) {
     double x = quat[0], y = quat[1], z = quat[2];
 
     if (!dest || quat == dest) {
-        quat[3] = -sqrt(abs(1.0 - x * x - y * y - z * z));
+        quat[3] = -sqrt(fabs(1.0 - x * x - y * y - z * z));
         return quat;
     }
     dest[0] = x;
     dest[1] = y;
     dest[2] = z;
-    dest[3] = -sqrt(abs(1.0 - x * x - y * y - z * z));
+    dest[3] = -sqrt(fabs(1.0 - x * x - y * y - z * z));
     return dest;
 }
 
@@ -217,7 +217,7 @@ quat_t quat_slerp(quat_t quat, quat_t quat2, double slerp, quat_t dest) {
         ratioA,
         ratioB;
 
-    if (abs(cosHalfTheta) >= 1.0) {
+    if (fabs(cosHalfTheta) >= 1.0) {
         if (dest != quat) {
             dest[0] = quat[0];
             dest[1] = quat[1];
@@ -230,7 +230,7 @@ quat_t quat_slerp(quat_t quat, quat_t quat2, double slerp, quat_t dest) {
     halfTheta = acos(cosHalfTheta);
     sinHalfTheta = sqrt(1.0 - cosHalfTheta * cosHalfTheta);
 
-    if (abs(sinHalfTheta) < 0.001) {
+    if (fabs(sinHalfTheta) < 0.001) {
         dest[0] = (quat[0] * 0.5 + quat2[0] * 0.5);
         dest[1] = (quat[1] * 0.5 + quat2[1] * 0.5);
         dest[2] = (quat[2] * 0.5 + quat2[2] * 0.5);
