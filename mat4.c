@@ -572,7 +572,7 @@ mat4_t mat4_frustum(double left, double right, double bottom, double top, double
 }
 
 mat4_t mat4_perspective(double fovy, double aspect, double near, double far, mat4_t dest) {
-    double top = near * tan(fovy * M_PI / 360.0),
+    double top = near * tan(fovy * 3.14159265358979323846 / 360.0),
         right = top * aspect;
     return mat4_frustum(-right, right, -top, top, near, far, dest);
 }
@@ -718,6 +718,6 @@ mat4_t mat4_fromRotationTranslation(quat_t quat, vec3_t vec, mat4_t dest) {
     dest[13] = vec[1];
     dest[14] = vec[2];
     dest[15] = 1;
-    
+
     return dest;
 }
