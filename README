@@ -1,3 +1,5 @@
+This was forked from https://github.com/coreh/gl-matrix.c
+
 This is a fairly straightforward port of gl-matrix.js (https://github.com/toji/gl-matrix)
 from JavaScript to C.
 
