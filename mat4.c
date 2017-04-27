@@ -278,7 +278,7 @@ mat4_t mat4_multiply(mat4_t mat, mat4_t mat2, mat4_t dest) {
     return dest;
 }
 
-mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest) {
+vec3_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, vec3_t dest) {
     if (!dest) { dest = vec; }
 
     double x = vec[0], y = vec[1], z = vec[2];
@@ -290,7 +290,7 @@ mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest) {
     return dest;
 }
 
-mat4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, mat4_t dest) {
+vec4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, vec4_t dest) {
     if (!dest) { dest = vec; }
 
     double x = vec[0], y = vec[1], z = vec[2], w = vec[3];

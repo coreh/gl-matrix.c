@@ -475,7 +475,7 @@ mat4_t mat4_multiply(mat4_t mat, mat4_t mat2, mat4_t dest);
  * Returns:
  * dest if not NULL, vec otherwise
  */
-mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest);
+vec3_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, vec3_t dest);
 
 /*
  * mat4_multiplyVec4
@@ -489,7 +489,7 @@ mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest);
  * Returns:
  * dest if not NULL, vec otherwise
  */
-mat4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, mat4_t dest);
+vec4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, vec4_t dest);
 
 /*
  * mat4_translate
