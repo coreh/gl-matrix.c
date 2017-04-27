@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 mat3_t mat3_create(mat3_t mat) {
-    mat3_t dest = calloc(sizeof(double), 9);
+    mat3_t dest = calloc(9, sizeof(double));
 
     if (mat) {
         dest[0] = mat[0];

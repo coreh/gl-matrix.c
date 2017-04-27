@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 vec3_t vec3_create(vec3_t vec) {
-    vec3_t dest = calloc(sizeof(double_t), 3);
+    vec3_t dest = calloc(3, sizeof(double));
 
     if (vec) {
         dest[0] = vec[0];

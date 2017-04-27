@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 quat_t quat_create(quat_t quat) {
-    quat_t dest = calloc(sizeof(double), 4);
+    quat_t dest = calloc(4, sizeof(double));
 
     if (quat) {
         dest[0] = quat[0];

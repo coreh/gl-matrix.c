@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 mat4_t mat4_create(mat4_t mat) {
-    mat4_t dest = calloc(sizeof(double), 16);
+    mat4_t dest = calloc(16, sizeof(double));
 
     if (mat) {
         dest[0] = mat[0];
