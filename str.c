@@ -3,8 +3,16 @@
 
 #include "gl-matrix.h"
 
+void vec2_str(vec2_t vec, char *buffer) {
+    sprintf(buffer, "[%f, %f]", vec[0], vec[1]);
+}
+
 void vec3_str(vec3_t vec, char *buffer) {
     sprintf(buffer, "[%f, %f, %f]", vec[0], vec[1], vec[2]);
+}
+
+void vec4_str(vec4_t vec, char *buffer) {
+    sprintf(buffer, "[%f, %f, %f, %f]", vec[0], vec[1], vec[2], vec[3]);
 }
 
 void mat3_str(mat3_t mat, char *buffer) {

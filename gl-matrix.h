@@ -22,11 +22,188 @@ extern "C" {
                               (GL_MATRIX_MINOR_VERSION << 8) | \
                               (GL_MATRIX_MICRO_VERSION))
 
+typedef double *vec2_t;
 typedef double *vec3_t;
 typedef double *vec4_t;
 typedef double *mat3_t;
 typedef double *mat4_t;
 typedef double *quat_t;
+
+/*
+ * vec2_t - 2 Dimensional Vector
+ */
+
+/*
+ * vec2_create
+ * Creates a new instance of a vec2_t
+ *
+ * Params:
+ * vec - Optional, vec2_t containing values to initialize with. If NULL, the 
+ * vector will be initialized with zeroes.
+ *
+ * Returns:
+ * New vec2
+ */
+vec2_t vec2_create(vec2_t vec);
+
+/*
+ * vec2_set
+ * Copies the values of one vec2_t to another
+ *
+ * Params:
+ * vec - vec2_t containing values to copy
+ * dest - vec2_t receiving copied values
+ *
+ * Returns:
+ * dest
+ */
+vec2_t vec2_set(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_add
+ * Performs a vector addition
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_add(vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_subtract
+ * Performs a vector subtraction
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_subtract(vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_negate
+ * Negates the components of a vec2
+ *
+ * Params:
+ * vec - vec2_t to negate
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_negate(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_scale
+ * Multiplies the components of a vec2_t by a scalar value
+ *
+ * Params:
+ * vec - vec2_t to scale
+ * val - Numeric value to scale by
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_scale(vec2_t vec, double val, vec2_t dest);
+
+/*
+ * vec2_normalize
+ * Generates a unit vector of the same direction as the provided vec2
+ * If vector length is 0, returns [0, 0]
+ *
+ * Params:
+ * vec - vec2_t to normalize
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_normalize(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_length
+ * Caclulates the length of a vec2
+ *
+ * Params:
+ * vec - vec2_t to calculate length of
+ *
+ * Returns:
+ * Length of vec
+ */
+double vec2_length(vec2_t vec);
+
+/*
+ * vec2_dot
+ * Caclulates the dot product of two vec2s
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ *
+ * Returns:
+ * Dot product of vec and vec2
+ */
+double vec2_dot(vec2_t vec, vec2_t vec2);
+
+/*
+ * vec2_direction
+ * Generates a unit vector pointing from one vector to another
+ *
+ * Params:
+ * vec - origin vec2
+ * vec2 - vec2_t to point to
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_direction (vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_lerp
+ * Performs a linear interpolation between two vec2
+ *
+ * Params:
+ * vec - vec2, first vector
+ * vec2 - vec2, second vector
+ * lerp - interpolation amount between the two inputs
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_lerp(vec2_t vec, vec2_t vec2, double lerp, vec2_t dest);
+
+/*
+ * vec2_dist
+ * Calculates the euclidian distance between two vec2
+ *
+ * Params:
+ * vec - vec2, first vector
+ * vec2 - vec2, second vector
+ *
+ * Returns:
+ * distance between vec and vec2
+ */
+double vec2_dist(vec2_t vec, vec2_t vec2);
+
+/*
+ * vec2_str
+ * Writes a string representation of a vector
+ *
+ * Params:
+ * vec - vec2_t to represent as a string
+ * buffer - char * to store the results
+ */
+void vec2_str(vec2_t vec, char *buffer);
 
 /*
  * vec3_t - 3 Dimensional Vector
@@ -250,6 +427,182 @@ vec3_t vec3_unproject(vec3_t vec, mat4_t view, mat4_t proj, vec4_t viewport, vec
  * buffer - char * to store the results
  */
 void vec3_str(vec3_t vec, char *buffer);
+
+/*
+ * vec4_t - 4 Dimensional Vector
+ */
+
+/*
+ * vec4_create
+ * Creates a new instance of a vec4_t
+ *
+ * Params:
+ * vec - Optional, vec4_t containing values to initialize with. If NULL, the 
+ * vector will be initialized with zeroes.
+ *
+ * Returns:
+ * New vec4
+ */
+vec4_t vec4_create(vec4_t vec);
+
+/*
+ * vec4_set
+ * Copies the values of one vec4_t to another
+ *
+ * Params:
+ * vec - vec4_t containing values to copy
+ * dest - vec4_t receiving copied values
+ *
+ * Returns:
+ * dest
+ */
+vec4_t vec4_set(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_add
+ * Performs a vector addition
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_add(vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_subtract
+ * Performs a vector subtraction
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_subtract(vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_negate
+ * Negates the components of a vec4
+ *
+ * Params:
+ * vec - vec4_t to negate
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_negate(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_scale
+ * Multiplies the components of a vec4_t by a scalar value
+ *
+ * Params:
+ * vec - vec4_t to scale
+ * val - Numeric value to scale by
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_scale(vec4_t vec, double val, vec4_t dest);
+
+/*
+ * vec4_normalize
+ * Generates a unit vector of the same direction as the provided vec4
+ * If vector length is 0, returns [0, 0, 0, 0]
+ *
+ * Params:
+ * vec - vec4_t to normalize
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_normalize(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_length
+ * Caclulates the length of a vec4
+ *
+ * Params:
+ * vec - vec4_t to calculate length of
+ *
+ * Returns:
+ * Length of vec
+ */
+double vec4_length(vec4_t vec);
+
+/*
+ * vec4_dot
+ * Caclulates the dot product of two vec4s
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ *
+ * Returns:
+ * Dot product of vec and vec2
+ */
+double vec4_dot(vec4_t vec, vec4_t vec2);
+
+/*
+ * vec4_direction
+ * Generates a unit vector pointing from one vector to another
+ *
+ * Params:
+ * vec - origin vec4
+ * vec2 - vec4_t to point to
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_direction (vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_lerp
+ * Performs a linear interpolation between two vec4
+ *
+ * Params:
+ * vec - vec4, first vector
+ * vec2 - vec4, second vector
+ * lerp - interpolation amount between the two inputs
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_lerp(vec4_t vec, vec4_t vec2, double lerp, vec4_t dest);
+
+/*
+ * vec4_dist
+ * Calculates the euclidian distance between two vec4
+ *
+ * Params:
+ * vec - vec4, first vector
+ * vec2 - vec4, second vector
+ *
+ * Returns:
+ * distance between vec and vec2
+ */
+double vec4_dist(vec4_t vec, vec4_t vec2);
+
+/*
+ * vec4_str
+ * Writes a string representation of a vector
+ *
+ * Params:
+ * vec - vec4_t to represent as a string
+ * buffer - char * to store the results
+ */
+void vec4_str(vec4_t vec, char *buffer);
 
 /*
  * mat3_t - 3x3 Matrix
