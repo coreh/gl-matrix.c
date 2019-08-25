@@ -33,8 +33,14 @@ install:
 
 # Single header file library
 glmatrix.h: gl-matrix.h $(SOURCES)
-	echo '/* Single header library version.' > $@
+	echo '/* Single header library vector and matrix library.' > $@
 	echo ' * You need to `#define GL_MATRIX_IMPLEMENTATION` in one of your source files' >> $@
+	echo ' * Single header version which can be obtained at <https://github.com/wernsey/gl-matrix.c>' >> $@
+	echo ' * Modified from the original C port by Marco Buono <https://github.com/coreh/gl-matrix.c>' >> $@
+	echo " * Which was ported to C from Brandon Jones' original JavaScript version <https://github.com/toji/gl-matrix>" >> $@
+	echo '' >> $@
+	cat LICENSE >> $@
+	echo '' >> $@
 	echo ' */' >> $@
 	cat gl-matrix.h >> $@
 	echo '#ifdef GL_MATRIX_IMPLEMENTATION' >> $@
