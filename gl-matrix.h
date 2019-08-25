@@ -1,3 +1,11 @@
+/*
+https://github.com/wernsey/gl-matrix.c
+This was forked from https://github.com/coreh/gl-matrix.c
+with some additions for vec2_t and vec4_t types.
+
+This is a fairly straightforward port of gl-matrix.js (https://github.com/toji/gl-matrix)
+from JavaScript to C.
+*/
 #ifndef GL_MATRIX_H
 #define GL_MATRIX_H
 
