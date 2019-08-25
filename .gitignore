@@ -1,3 +1,4 @@
 *.o
 libgl-matrix.a
 .DS_Store
+glmatrix.h
