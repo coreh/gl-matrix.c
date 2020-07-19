@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 vec4_t vec4_create(vec4_t vec) {
-    vec4_t dest = calloc(4, sizeof(double));
+    vec4_t dest = calloc(4, sizeof(numeric_t));
 
     if (vec) {
         dest[0] = vec[0];
@@ -69,7 +69,7 @@ vec4_t vec4_negate(vec4_t vec, vec4_t dest) {
     return dest;
 }
 
-vec4_t vec4_scale(vec4_t vec, double val, vec4_t dest) {
+vec4_t vec4_scale(vec4_t vec, numeric_t val, vec4_t dest) {
     if (!dest || vec == dest) {
         vec[0] *= val;
         vec[1] *= val;
@@ -88,7 +88,7 @@ vec4_t vec4_scale(vec4_t vec, double val, vec4_t dest) {
 vec4_t vec4_normalize(vec4_t vec, vec4_t dest) {
     if (!dest) { dest = vec; }
 
-    double x = vec[0], y = vec[1], z = vec[2], w = vec[3],
+    numeric_t x = vec[0], y = vec[1], z = vec[2], w = vec[3],
         len = sqrt(x * x + y * y + z * z + w * w);
 
     if (!len) {
@@ -113,19 +113,19 @@ vec4_t vec4_normalize(vec4_t vec, vec4_t dest) {
     return dest;
 }
 
-double vec4_length(vec4_t vec) {
-    double x = vec[0], y = vec[1], z = vec[2], w = vec[3];
+numeric_t vec4_length(vec4_t vec) {
+    numeric_t x = vec[0], y = vec[1], z = vec[2], w = vec[3];
     return sqrt(x * x + y * y + z * z + w * w);
 }
 
-double vec4_dot(vec4_t vec, vec4_t vec2) {
+numeric_t vec4_dot(vec4_t vec, vec4_t vec2) {
     return vec[0] * vec2[0] + vec[1] * vec2[1] + vec[2] * vec2[2] + vec[3] * vec2[3];
 }
 
 vec4_t vec4_direction (vec4_t vec, vec4_t vec2, vec4_t dest) {
     if (!dest) { dest = vec; }
 
-    double x = vec[0] - vec2[0],
+    numeric_t x = vec[0] - vec2[0],
         y = vec[1] - vec2[1],
         z = vec[2] - vec2[2],
         w = vec[3] - vec2[3],
@@ -147,7 +147,7 @@ vec4_t vec4_direction (vec4_t vec, vec4_t vec2, vec4_t dest) {
     return dest;
 }
 
-vec4_t vec4_lerp(vec4_t vec, vec4_t vec2, double lerp, vec4_t dest) {
+vec4_t vec4_lerp(vec4_t vec, vec4_t vec2, numeric_t lerp, vec4_t dest) {
     if (!dest) { dest = vec; }
 
     dest[0] = vec[0] + lerp * (vec2[0] - vec[0]);
@@ -158,8 +158,8 @@ vec4_t vec4_lerp(vec4_t vec, vec4_t vec2, double lerp, vec4_t dest) {
     return dest;
 }
 
-double vec4_dist(vec4_t vec, vec4_t vec2) {
-    double x = vec2[0] - vec[0],
+numeric_t vec4_dist(vec4_t vec, vec4_t vec2) {
+    numeric_t x = vec2[0] - vec[0],
         y = vec2[1] - vec[1],
         z = vec2[2] - vec[2],
         w = vec2[3] - vec[3];

@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 vec2_t vec2_create(vec2_t vec) {
-    vec2_t dest = calloc(2, sizeof(double));
+    vec2_t dest = calloc(2, sizeof(numeric_t));
 
     if (vec) {
         dest[0] = vec[0];
@@ -55,7 +55,7 @@ vec2_t vec2_negate(vec2_t vec, vec2_t dest) {
     return dest;
 }
 
-vec2_t vec2_scale(vec2_t vec, double val, vec2_t dest) {
+vec2_t vec2_scale(vec2_t vec, numeric_t val, vec2_t dest) {
     if (!dest || vec == dest) {
         vec[0] *= val;
         vec[1] *= val;
@@ -70,7 +70,7 @@ vec2_t vec2_scale(vec2_t vec, double val, vec2_t dest) {
 vec2_t vec2_normalize(vec2_t vec, vec2_t dest) {
     if (!dest) { dest = vec; }
 
-    double x = vec[0], y = vec[1],
+    numeric_t x = vec[0], y = vec[1],
         len = sqrt(x * x + y * y);
 
     if (!len) {
@@ -89,19 +89,19 @@ vec2_t vec2_normalize(vec2_t vec, vec2_t dest) {
     return dest;
 }
 
-double vec2_length(vec2_t vec) {
-    double x = vec[0], y = vec[1];
+numeric_t vec2_length(vec2_t vec) {
+    numeric_t x = vec[0], y = vec[1];
     return sqrt(x * x + y * y);
 }
 
-double vec2_dot(vec2_t vec, vec2_t vec2) {
+numeric_t vec2_dot(vec2_t vec, vec2_t vec2) {
     return vec[0] * vec2[0] + vec[1] * vec2[1];
 }
 
 vec2_t vec2_direction (vec2_t vec, vec2_t vec2, vec2_t dest) {
     if (!dest) { dest = vec; }
 
-    double x = vec[0] - vec2[0],
+    numeric_t x = vec[0] - vec2[0],
         y = vec[1] - vec2[1],
         len = sqrt(x * x + y * y);
 
@@ -117,15 +117,15 @@ vec2_t vec2_direction (vec2_t vec, vec2_t vec2, vec2_t dest) {
     return dest;
 }
 
-vec2_t vec2_lerp(vec2_t vec, vec2_t vec2, double lerp, vec2_t dest) {
+vec2_t vec2_lerp(vec2_t vec, vec2_t vec2, numeric_t lerp, vec2_t dest) {
     if (!dest) { dest = vec; }
     dest[0] = vec[0] + lerp * (vec2[0] - vec[0]);
     dest[1] = vec[1] + lerp * (vec2[1] - vec[1]);
     return dest;
 }
 
-double vec2_dist(vec2_t vec, vec2_t vec2) {
-    double x = vec2[0] - vec[0],
+numeric_t vec2_dist(vec2_t vec, vec2_t vec2) {
+    numeric_t x = vec2[0] - vec[0],
         y = vec2[1] - vec[1];
 
     return sqrt(x*x + y*y);

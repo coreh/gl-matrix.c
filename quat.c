@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 quat_t quat_create(quat_t quat) {
-    quat_t dest = calloc(4, sizeof(double));
+    quat_t dest = calloc(4, sizeof(numeric_t));
 
     if (quat) {
         dest[0] = quat[0];
@@ -26,7 +26,7 @@ quat_t quat_set(quat_t quat, quat_t dest) {
 }
 
 quat_t quat_calculateW(quat_t quat, quat_t dest) {
-    double x = quat[0], y = quat[1], z = quat[2];
+    numeric_t x = quat[0], y = quat[1], z = quat[2];
 
     if (!dest || quat == dest) {
         quat[3] = -sqrt(fabs(1.0 - x * x - y * y - z * z));
@@ -39,12 +39,12 @@ quat_t quat_calculateW(quat_t quat, quat_t dest) {
     return dest;
 }
 
-double quat_dot(quat_t quat, quat_t quat2) {
+numeric_t quat_dot(quat_t quat, quat_t quat2) {
     return quat[0]*quat2[0] + quat[1]*quat2[1] + quat[2]*quat2[2] + quat[3]*quat2[3];
 }
 
 quat_t quat_inverse(quat_t quat, quat_t dest) {
-    double dot = quat_dot(quat,quat),
+    numeric_t dot = quat_dot(quat,quat),
         invDot = 1.0/dot;
     if(!dest || quat == dest) {
         quat[0] *= -invDot;
@@ -74,15 +74,15 @@ quat_t quat_conjugate(quat_t quat, quat_t dest) {
     return dest;
 }
 
-double quat_length(quat_t quat) {
-    double x = quat[0], y = quat[1], z = quat[2], w = quat[3];
+numeric_t quat_length(quat_t quat) {
+    numeric_t x = quat[0], y = quat[1], z = quat[2], w = quat[3];
     return sqrt(x * x + y * y + z * z + w * w);
 }
 
 quat_t quat_normalize(quat_t quat, quat_t dest) {
     if (!dest) { dest = quat; }
 
-    double x = quat[0], y = quat[1], z = quat[2], w = quat[3],
+    numeric_t x = quat[0], y = quat[1], z = quat[2], w = quat[3],
         len = sqrt(x * x + y * y + z * z + w * w);
     if (len == 0) {
         dest[0] = 0;
@@ -103,7 +103,7 @@ quat_t quat_normalize(quat_t quat, quat_t dest) {
 quat_t quat_multiply(quat_t quat, quat_t quat2, quat_t dest) {
     if (!dest) { dest = quat; }
 
-    double qax = quat[0], qay = quat[1], qaz = quat[2], qaw = quat[3],
+    numeric_t qax = quat[0], qay = quat[1], qaz = quat[2], qaw = quat[3],
         qbx = quat2[0], qby = quat2[1], qbz = quat2[2], qbw = quat2[3];
 
     dest[0] = qax * qbw + qaw * qbx + qay * qbz - qaz * qby;
@@ -117,7 +117,7 @@ quat_t quat_multiply(quat_t quat, quat_t quat2, quat_t dest) {
 quat_t quat_multiplyVec3(quat_t quat, vec3_t vec, vec3_t dest) {
     if (!dest) { dest = vec; }
 
-    double x = vec[0], y = vec[1], z = vec[2],
+    numeric_t x = vec[0], y = vec[1], z = vec[2],
         qx = quat[0], qy = quat[1], qz = quat[2], qw = quat[3],
 
         // calculate quat * vec
@@ -137,7 +137,7 @@ quat_t quat_multiplyVec3(quat_t quat, vec3_t vec, vec3_t dest) {
 mat3_t quat_toMat3(quat_t quat, mat3_t dest) {
     if (!dest) { dest = mat3_create(NULL); }
 
-    double x = quat[0], y = quat[1], z = quat[2], w = quat[3],
+    numeric_t x = quat[0], y = quat[1], z = quat[2], w = quat[3],
         x2 = x + x,
         y2 = y + y,
         z2 = z + z,
@@ -170,7 +170,7 @@ mat3_t quat_toMat3(quat_t quat, mat3_t dest) {
 quat_t quat_toMat4(quat_t quat, mat4_t dest) {
     if (!dest) { dest = mat4_create(NULL); }
 
-    double x = quat[0], y = quat[1], z = quat[2], w = quat[3],
+    numeric_t x = quat[0], y = quat[1], z = quat[2], w = quat[3],
         x2 = x + x,
         y2 = y + y,
         z2 = z + z,
@@ -208,10 +208,10 @@ quat_t quat_toMat4(quat_t quat, mat4_t dest) {
     return dest;
 }
 
-quat_t quat_slerp(quat_t quat, quat_t quat2, double slerp, quat_t dest) {
+quat_t quat_slerp(quat_t quat, quat_t quat2, numeric_t slerp, quat_t dest) {
     if (!dest) { dest = quat; }
 
-    double cosHalfTheta = quat[0] * quat2[0] + quat[1] * quat2[1] + quat[2] * quat2[2] + quat[3] * quat2[3],
+    numeric_t cosHalfTheta = quat[0] * quat2[0] + quat[1] * quat2[1] + quat[2] * quat2[2] + quat[3] * quat2[3],
         halfTheta,
         sinHalfTheta,
         ratioA,
