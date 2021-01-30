@@ -13,11 +13,11 @@ from JavaScript to C.
 extern "C" {
 #endif
 
-/* 
+/*
  * gl-matrix.c - High performance matrix and vector operations for OpenGL
  * Version 1.2.3
  */
- 
+
 #define GL_MATRIX_MAJOR_VERSION 1
 #define GL_MATRIX_MINOR_VERSION 2
 #define GL_MATRIX_MICRO_VERSION 3
@@ -48,7 +48,7 @@ typedef numeric_t *quat_t;
  * Creates a new instance of a vec2_t
  *
  * Params:
- * vec - Optional, vec2_t containing values to initialize with. If NULL, the 
+ * vec - Optional, vec2_t containing values to initialize with. If NULL, the
  * vector will be initialized with zeroes.
  *
  * Returns:
@@ -224,7 +224,7 @@ void vec2_str(vec2_t vec, char *buffer);
  * Creates a new instance of a vec3_t
  *
  * Params:
- * vec - Optional, vec3_t containing values to initialize with. If NULL, the 
+ * vec - Optional, vec3_t containing values to initialize with. If NULL, the
  * vector will be initialized with zeroes.
  *
  * Returns:
@@ -413,7 +413,7 @@ numeric_t vec3_dist(vec3_t vec, vec3_t vec2);
 /*
  * vec3_unproject
  * Projects the specified vec3_t from screen space into object space
- * Based on Mesa gluUnProject implementation at: 
+ * Based on Mesa gluUnProject implementation at:
  * http://webcvs.freedesktop.org/mesa/Mesa/src/glu/mesa/project.c?revision=1.4&view=markup
  *
  * Params:
@@ -447,7 +447,7 @@ void vec3_str(vec3_t vec, char *buffer);
  * Creates a new instance of a vec4_t
  *
  * Params:
- * vec - Optional, vec4_t containing values to initialize with. If NULL, the 
+ * vec - Optional, vec4_t containing values to initialize with. If NULL, the
  * vector will be initialized with zeroes.
  *
  * Returns:
@@ -688,7 +688,7 @@ mat4_t mat3_toMat4(mat3_t mat, mat4_t dest);
  *
  * Params:
  * mat - mat3_t to represent as a string
- * buffer - char * to store the results 
+ * buffer - char * to store the results
  */
 void mat3_str(mat3_t mat, char *buffer);
 
@@ -732,7 +732,7 @@ mat4_t mat4_set(mat4_t mat, mat4_t dest);
  * dest
  */
 mat4_t mat4_identity(mat4_t dest);
-     
+
 /*
  * mat4_transpose
  * Transposes a mat4_t (flips the values over the diagonal)
@@ -883,6 +883,20 @@ mat4_t mat4_translate(mat4_t mat, vec3_t vec, mat4_t dest);
 mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest);
 
 /*
+ * mat4_scale_scalar
+ * Scales a matrix by the given scalar
+ *
+ * Params:
+ * mat - mat4_t to scale
+ * scalar - scalar specifying the scale for each axis
+ * dest - Optional, mat4_t receiving operation result. If NULL, result is written to mat
+ *
+ * Returns:
+ * dest if not NULL, mat otherwise
+ */
+mat4_t mat4_scale_scalar(mat4_t mat, numeric_t scalar, mat4_t dest);
+
+/*
  * mat4_rotate
  * Rotates a matrix by the given angle around the specified axis
  * If rotating around a primary axis (X,Y,Z) one of the specialized rotation functions should be used instead for performance
@@ -890,7 +904,7 @@ mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest);
  * Params:
  * mat - mat4_t to rotate
  * angle - angle (in radians) to rotate
- * axis - vec3_t representing the axis to rotate around 
+ * axis - vec3_t representing the axis to rotate around
  * dest - Optional, mat4_t receiving operation result. If NULL, result is written to mat
  *
  * Returns:
@@ -1032,7 +1046,7 @@ mat4_t mat4_fromRotationTranslation(quat_t quat, vec3_t vec, mat4_t dest);
 void mat4_str(mat4_t mat, char *buffer);
 
 /*
- * quat - Quaternions 
+ * quat - Quaternions
  */
 
 /*
@@ -1063,8 +1077,8 @@ quat_t quat_set(quat_t quat, quat_t dest);
 /*
  * quat_calculateW
  * Calculates the W component of a quat_t from the X, Y, and Z components.
- * Assumes that quaternion is 1 unit in length. 
- * Any existing W component will be ignored. 
+ * Assumes that quaternion is 1 unit in length.
+ * Any existing W component will be ignored.
  *
  * Params:
  * quat - quat_t to calculate W component of
@@ -1206,6 +1220,25 @@ quat_t quat_toMat4(quat_t quat, mat4_t dest);
  * dest if not NULL, quat otherwise
  */
 quat_t quat_slerp(quat_t quat, quat_t quat2, numeric_t slerp, quat_t dest);
+
+/*
+ * quat_rotate
+ * Rotates a point around a quaternion by applying the formula
+ *
+ *    r = q.p.q*
+ *
+ * where q is the quaternion, q* is its conjugate, and p is the
+ * point to be rotated.
+ *
+ * Params:
+ * quat - quat_t, first quaternion
+ * p - vec3_t, the point to rotate
+ * dest - Optional, quat_t receiving operation result. If NULL, result is written to quat
+ *
+ * Returns:
+ * dest if not NULL, quat otherwise
+ */
+quat_t quat_rotate(quat_t quat, vec3_t p, quat_t dest);
 
 /*
  * quat_str

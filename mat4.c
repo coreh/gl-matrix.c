@@ -370,6 +370,42 @@ mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest) {
     return dest;
 }
 
+mat4_t mat4_scale_scalar(mat4_t mat, numeric_t scalar, mat4_t dest) {
+    if (!dest || mat == dest) {
+        mat[0] *= scalar;
+        mat[1] *= scalar;
+        mat[2] *= scalar;
+        mat[3] *= scalar;
+        mat[4] *= scalar;
+        mat[5] *= scalar;
+        mat[6] *= scalar;
+        mat[7] *= scalar;
+        mat[8] *= scalar;
+        mat[9] *= scalar;
+        mat[10] *= scalar;
+        mat[11] *= scalar;
+        return mat;
+    }
+
+    dest[0] = mat[0] * scalar;
+    dest[1] = mat[1] * scalar;
+    dest[2] = mat[2] * scalar;
+    dest[3] = mat[3] * scalar;
+    dest[4] = mat[4] * scalar;
+    dest[5] = mat[5] * scalar;
+    dest[6] = mat[6] * scalar;
+    dest[7] = mat[7] * scalar;
+    dest[8] = mat[8] * scalar;
+    dest[9] = mat[9] * scalar;
+    dest[10] = mat[10] * scalar;
+    dest[11] = mat[11] * scalar;
+    dest[12] = mat[12];
+    dest[13] = mat[13];
+    dest[14] = mat[14];
+    dest[15] = mat[15];
+    return dest;
+}
+
 mat4_t mat4_rotate(mat4_t mat, numeric_t angle, vec3_t axis, mat4_t dest) {
     numeric_t x = axis[0], y = axis[1], z = axis[2],
         len = sqrt(x * x + y * y + z * z),

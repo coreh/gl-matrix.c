@@ -248,3 +248,16 @@ quat_t quat_slerp(quat_t quat, quat_t quat2, numeric_t slerp, quat_t dest) {
 
     return dest;
 }
+
+quat_t quat_rotate(quat_t q, vec3_t p, quat_t dest) {
+
+    if(!dest) {
+        dest = q;
+    }
+    numeric_t t[4] = {p[0], p[1], p[2], 0}, r[4];
+
+    quat_multiply(q, t, r);
+    quat_multiply(r, quat_conjugate(q, t), dest);
+
+    return dest;
+}
