@@ -26,6 +26,22 @@ vec4_t vec4_set(vec4_t vec, vec4_t dest) {
     return dest;
 }
 
+vec4_t vec4_zeroes(vec4_t vec) {
+    vec[0] = 0;
+    vec[1] = 0;
+    vec[2] = 0;
+    vec[3] = 0;
+    return vec;
+}
+
+vec4_t vec4_ones(vec4_t vec) {
+    vec[0] = 1;
+    vec[1] = 1;
+    vec[2] = 1;
+    vec[3] = 1;
+    return vec;
+}
+
 vec4_t vec4_add(vec4_t vec, vec4_t vec2, vec4_t dest) {
     if (!dest || vec == dest) {
         vec[0] += vec2[0];
@@ -39,7 +55,7 @@ vec4_t vec4_add(vec4_t vec, vec4_t vec2, vec4_t dest) {
     dest[1] = vec[1] + vec2[1];
     dest[2] = vec[2] + vec2[2];
     dest[3] = vec[3] + vec2[3];
-    
+
     return dest;
 }
 
@@ -163,6 +179,6 @@ numeric_t vec4_dist(vec4_t vec, vec4_t vec2) {
         y = vec2[1] - vec[1],
         z = vec2[2] - vec[2],
         w = vec2[3] - vec[3];
-        
+
     return sqrt(x*x + y*y + z*z + w*w);
 }

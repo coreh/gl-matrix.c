@@ -25,6 +25,20 @@ vec3_t vec3_set(vec3_t vec, vec3_t dest) {
     return dest;
 }
 
+vec3_t vec3_zeroes(vec3_t vec) {
+    vec[0] = 0;
+    vec[1] = 0;
+    vec[2] = 0;
+    return vec;
+}
+
+vec3_t vec3_ones(vec3_t vec) {
+    vec[0] = 1;
+    vec[1] = 1;
+    vec[2] = 1;
+    return vec;
+}
+
 vec3_t vec3_add(vec3_t vec, vec3_t vec2, vec3_t dest) {
     if (!dest || vec == dest) {
         vec[0] += vec2[0];
@@ -36,7 +50,7 @@ vec3_t vec3_add(vec3_t vec, vec3_t vec2, vec3_t dest) {
     dest[0] = vec[0] + vec2[0];
     dest[1] = vec[1] + vec2[1];
     dest[2] = vec[2] + vec2[2];
-    
+
     return dest;
 }
 
@@ -173,7 +187,7 @@ numeric_t vec3_dist(vec3_t vec, vec3_t vec2) {
     numeric_t x = vec2[0] - vec[0],
         y = vec2[1] - vec[1],
         z = vec2[2] - vec[2];
-        
+
     return sqrt(x*x + y*y + z*z);
 }
 
@@ -182,21 +196,21 @@ vec3_t vec3_unproject(vec3_t vec, mat4_t view, mat4_t proj, vec4_t viewport, vec
 
     mat4_t m = mat4_create(NULL);
     numeric_t *v = malloc(sizeof(numeric_t) * 4);
-    
+
     v[0] = (vec[0] - viewport[0]) * 2.0 / viewport[2] - 1.0;
     v[1] = (vec[1] - viewport[1]) * 2.0 / viewport[3] - 1.0;
     v[2] = 2.0 * vec[2] - 1.0;
     v[3] = 1.0;
-    
+
     mat4_multiply(proj, view, m);
     if(!mat4_inverse(m, NULL)) { return NULL; }
-    
+
     mat4_multiplyVec4(m, v, NULL);
     if(v[3] == 0.0) { return NULL; }
 
     dest[0] = v[0] / v[3];
     dest[1] = v[1] / v[3];
     dest[2] = v[2] / v[3];
-    
+
     return dest;
 }

@@ -22,6 +22,18 @@ vec2_t vec2_set(vec2_t vec, vec2_t dest) {
     return dest;
 }
 
+vec2_t vec2_zeroes(vec2_t vec) {
+    vec[0] = 0;
+    vec[1] = 0;
+    return vec;
+}
+
+vec2_t vec2_ones(vec2_t vec) {
+    vec[0] = 1;
+    vec[1] = 1;
+    return vec;
+}
+
 vec2_t vec2_add(vec2_t vec, vec2_t vec2, vec2_t dest) {
     if (!dest || vec == dest) {
         vec[0] += vec2[0];
