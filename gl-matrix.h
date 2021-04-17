@@ -1,3 +1,11 @@
+/*
+https://github.com/wernsey/gl-matrix.c
+This was forked from https://github.com/coreh/gl-matrix.c
+with some additions for vec2_t and vec4_t types.
+
+This is a fairly straightforward port of gl-matrix.js (https://github.com/toji/gl-matrix)
+from JavaScript to C.
+*/
 #ifndef GL_MATRIX_H
 #define GL_MATRIX_H
 
@@ -5,11 +13,11 @@
 extern "C" {
 #endif
 
-/* 
+/*
  * gl-matrix.c - High performance matrix and vector operations for OpenGL
  * Version 1.2.3
  */
- 
+
 #define GL_MATRIX_MAJOR_VERSION 1
 #define GL_MATRIX_MINOR_VERSION 2
 #define GL_MATRIX_MICRO_VERSION 3
@@ -22,11 +30,214 @@ extern "C" {
                               (GL_MATRIX_MINOR_VERSION << 8) | \
                               (GL_MATRIX_MICRO_VERSION))
 
-typedef double *vec3_t;
-typedef double *vec4_t;
-typedef double *mat3_t;
-typedef double *mat4_t;
-typedef double *quat_t;
+typedef float numeric_t;
+
+typedef numeric_t *vec2_t;
+typedef numeric_t *vec3_t;
+typedef numeric_t *vec4_t;
+typedef numeric_t *mat3_t;
+typedef numeric_t *mat4_t;
+typedef numeric_t *quat_t;
+
+/*
+ * vec2_t - 2 Dimensional Vector
+ */
+
+/*
+ * vec2_create
+ * Creates a new instance of a vec2_t
+ *
+ * Params:
+ * vec - Optional, vec2_t containing values to initialize with. If NULL, the
+ * vector will be initialized with zeroes.
+ *
+ * Returns:
+ * New vec2
+ */
+vec2_t vec2_create(vec2_t vec);
+
+/*
+ * vec2_set
+ * Copies the values of one vec2_t to another
+ *
+ * Params:
+ * vec - vec2_t containing values to copy
+ * dest - vec2_t receiving copied values
+ *
+ * Returns:
+ * dest
+ */
+vec2_t vec2_set(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_zeroes
+ * Sets the value of a vec2_t to {0,0}
+ *
+ * Params:
+ * vec - vec2_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec2_t vec2_zeroes(vec2_t vec);
+
+/*
+ * vec2_ones
+ * Sets the value of a vec2_t to {1,1}
+ *
+ * Params:
+ * vec - vec2_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec2_t vec2_ones(vec2_t vec);
+
+/*
+ * vec2_add
+ * Performs a vector addition
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_add(vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_subtract
+ * Performs a vector subtraction
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_subtract(vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_negate
+ * Negates the components of a vec2
+ *
+ * Params:
+ * vec - vec2_t to negate
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_negate(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_scale
+ * Multiplies the components of a vec2_t by a scalar value
+ *
+ * Params:
+ * vec - vec2_t to scale
+ * val - Numeric value to scale by
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_scale(vec2_t vec, numeric_t val, vec2_t dest);
+
+/*
+ * vec2_normalize
+ * Generates a unit vector of the same direction as the provided vec2
+ * If vector length is 0, returns [0, 0]
+ *
+ * Params:
+ * vec - vec2_t to normalize
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_normalize(vec2_t vec, vec2_t dest);
+
+/*
+ * vec2_length
+ * Caclulates the length of a vec2
+ *
+ * Params:
+ * vec - vec2_t to calculate length of
+ *
+ * Returns:
+ * Length of vec
+ */
+numeric_t vec2_length(vec2_t vec);
+
+/*
+ * vec2_dot
+ * Caclulates the dot product of two vec2s
+ *
+ * Params:
+ * vec - vec2, first operand
+ * vec2 - vec2, second operand
+ *
+ * Returns:
+ * Dot product of vec and vec2
+ */
+numeric_t vec2_dot(vec2_t vec, vec2_t vec2);
+
+/*
+ * vec2_direction
+ * Generates a unit vector pointing from one vector to another
+ *
+ * Params:
+ * vec - origin vec2
+ * vec2 - vec2_t to point to
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_direction (vec2_t vec, vec2_t vec2, vec2_t dest);
+
+/*
+ * vec2_lerp
+ * Performs a linear interpolation between two vec2
+ *
+ * Params:
+ * vec - vec2, first vector
+ * vec2 - vec2, second vector
+ * lerp - interpolation amount between the two inputs
+ * dest - Optional, vec2_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec2_t vec2_lerp(vec2_t vec, vec2_t vec2, numeric_t lerp, vec2_t dest);
+
+/*
+ * vec2_dist
+ * Calculates the euclidian distance between two vec2
+ *
+ * Params:
+ * vec - vec2, first vector
+ * vec2 - vec2, second vector
+ *
+ * Returns:
+ * distance between vec and vec2
+ */
+numeric_t vec2_dist(vec2_t vec, vec2_t vec2);
+
+/*
+ * vec2_str
+ * Writes a string representation of a vector
+ *
+ * Params:
+ * vec - vec2_t to represent as a string
+ * buffer - char * to store the results
+ */
+void vec2_str(vec2_t vec, char *buffer);
 
 /*
  * vec3_t - 3 Dimensional Vector
@@ -37,7 +248,7 @@ typedef double *quat_t;
  * Creates a new instance of a vec3_t
  *
  * Params:
- * vec - Optional, vec3_t containing values to initialize with. If NULL, the 
+ * vec - Optional, vec3_t containing values to initialize with. If NULL, the
  * vector will be initialized with zeroes.
  *
  * Returns:
@@ -57,6 +268,30 @@ vec3_t vec3_create(vec3_t vec);
  * dest
  */
 vec3_t vec3_set(vec3_t vec, vec3_t dest);
+
+/*
+ * vec3_zeroes
+ * Sets the value of a vec3_t to {0,0,0}
+ *
+ * Params:
+ * vec - vec3_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec3_t vec3_zeroes(vec3_t vec);
+
+/*
+ * vec3_ones
+ * Sets the value of a vec3_t to {1,1,1}
+ *
+ * Params:
+ * vec - vec3_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec3_t vec3_ones(vec3_t vec);
 
 /*
  * vec3_add
@@ -125,7 +360,7 @@ vec3_t vec3_negate(vec3_t vec, vec3_t dest);
  * Returns:
  * dest if not NULL, vec otherwise
  */
-vec3_t vec3_scale(vec3_t vec, double val, vec3_t dest);
+vec3_t vec3_scale(vec3_t vec, numeric_t val, vec3_t dest);
 
 /*
  * vec3_normalize
@@ -165,7 +400,7 @@ vec3_t vec3_cross (vec3_t vec, vec3_t vec2, vec3_t dest);
  * Returns:
  * Length of vec
  */
-double vec3_length(vec3_t vec);
+numeric_t vec3_length(vec3_t vec);
 
 /*
  * vec3_dot
@@ -178,7 +413,7 @@ double vec3_length(vec3_t vec);
  * Returns:
  * Dot product of vec and vec2
  */
-double vec3_dot(vec3_t vec, vec3_t vec2);
+numeric_t vec3_dot(vec3_t vec, vec3_t vec2);
 
 /*
  * vec3_direction
@@ -208,7 +443,7 @@ vec3_t vec3_direction (vec3_t vec, vec3_t vec2, vec3_t dest);
  * dest if not NULL, vec otherwise
  */
 
-vec3_t vec3_lerp(vec3_t vec, vec3_t vec2, double lerp, vec3_t dest);
+vec3_t vec3_lerp(vec3_t vec, vec3_t vec2, numeric_t lerp, vec3_t dest);
 
 /*
  * vec3_dist
@@ -221,12 +456,12 @@ vec3_t vec3_lerp(vec3_t vec, vec3_t vec2, double lerp, vec3_t dest);
  * Returns:
  * distance between vec and vec2
  */
-double vec3_dist(vec3_t vec, vec3_t vec2);
+numeric_t vec3_dist(vec3_t vec, vec3_t vec2);
 
 /*
  * vec3_unproject
  * Projects the specified vec3_t from screen space into object space
- * Based on Mesa gluUnProject implementation at: 
+ * Based on Mesa gluUnProject implementation at:
  * http://webcvs.freedesktop.org/mesa/Mesa/src/glu/mesa/project.c?revision=1.4&view=markup
  *
  * Params:
@@ -250,6 +485,206 @@ vec3_t vec3_unproject(vec3_t vec, mat4_t view, mat4_t proj, vec4_t viewport, vec
  * buffer - char * to store the results
  */
 void vec3_str(vec3_t vec, char *buffer);
+
+/*
+ * vec4_t - 4 Dimensional Vector
+ */
+
+/*
+ * vec4_create
+ * Creates a new instance of a vec4_t
+ *
+ * Params:
+ * vec - Optional, vec4_t containing values to initialize with. If NULL, the
+ * vector will be initialized with zeroes.
+ *
+ * Returns:
+ * New vec4
+ */
+vec4_t vec4_create(vec4_t vec);
+
+/*
+ * vec4_set
+ * Copies the values of one vec4_t to another
+ *
+ * Params:
+ * vec - vec4_t containing values to copy
+ * dest - vec4_t receiving copied values
+ *
+ * Returns:
+ * dest
+ */
+vec4_t vec4_set(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_zeroes
+ * Sets the value of a vec4_t to {0,0,0,0}
+ *
+ * Params:
+ * vec - vec4_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec4_t vec4_zeroes(vec4_t vec);
+
+/*
+ * vec4_ones
+ * Sets the value of a vec4_t to {1,1,1,1}
+ *
+ * Params:
+ * vec - vec4_t to set
+ *
+ * Returns:
+ * vec
+ */
+vec4_t vec4_ones(vec4_t vec);
+
+/*
+ * vec4_add
+ * Performs a vector addition
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_add(vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_subtract
+ * Performs a vector subtraction
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_subtract(vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_negate
+ * Negates the components of a vec4
+ *
+ * Params:
+ * vec - vec4_t to negate
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_negate(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_scale
+ * Multiplies the components of a vec4_t by a scalar value
+ *
+ * Params:
+ * vec - vec4_t to scale
+ * val - Numeric value to scale by
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_scale(vec4_t vec, numeric_t val, vec4_t dest);
+
+/*
+ * vec4_normalize
+ * Generates a unit vector of the same direction as the provided vec4
+ * If vector length is 0, returns [0, 0, 0, 0]
+ *
+ * Params:
+ * vec - vec4_t to normalize
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_normalize(vec4_t vec, vec4_t dest);
+
+/*
+ * vec4_length
+ * Caclulates the length of a vec4
+ *
+ * Params:
+ * vec - vec4_t to calculate length of
+ *
+ * Returns:
+ * Length of vec
+ */
+numeric_t vec4_length(vec4_t vec);
+
+/*
+ * vec4_dot
+ * Caclulates the dot product of two vec4s
+ *
+ * Params:
+ * vec - vec4, first operand
+ * vec2 - vec4, second operand
+ *
+ * Returns:
+ * Dot product of vec and vec2
+ */
+numeric_t vec4_dot(vec4_t vec, vec4_t vec2);
+
+/*
+ * vec4_direction
+ * Generates a unit vector pointing from one vector to another
+ *
+ * Params:
+ * vec - origin vec4
+ * vec2 - vec4_t to point to
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_direction (vec4_t vec, vec4_t vec2, vec4_t dest);
+
+/*
+ * vec4_lerp
+ * Performs a linear interpolation between two vec4
+ *
+ * Params:
+ * vec - vec4, first vector
+ * vec2 - vec4, second vector
+ * lerp - interpolation amount between the two inputs
+ * dest - Optional, vec4_t receiving operation result. If NULL, result is written to vec
+ *
+ * Returns:
+ * dest if not NULL, vec otherwise
+ */
+vec4_t vec4_lerp(vec4_t vec, vec4_t vec2, numeric_t lerp, vec4_t dest);
+
+/*
+ * vec4_dist
+ * Calculates the euclidian distance between two vec4
+ *
+ * Params:
+ * vec - vec4, first vector
+ * vec2 - vec4, second vector
+ *
+ * Returns:
+ * distance between vec and vec2
+ */
+numeric_t vec4_dist(vec4_t vec, vec4_t vec2);
+
+/*
+ * vec4_str
+ * Writes a string representation of a vector
+ *
+ * Params:
+ * vec - vec4_t to represent as a string
+ * buffer - char * to store the results
+ */
+void vec4_str(vec4_t vec, char *buffer);
 
 /*
  * mat3_t - 3x3 Matrix
@@ -325,7 +760,7 @@ mat4_t mat3_toMat4(mat3_t mat, mat4_t dest);
  *
  * Params:
  * mat - mat3_t to represent as a string
- * buffer - char * to store the results 
+ * buffer - char * to store the results
  */
 void mat3_str(mat3_t mat, char *buffer);
 
@@ -369,7 +804,7 @@ mat4_t mat4_set(mat4_t mat, mat4_t dest);
  * dest
  */
 mat4_t mat4_identity(mat4_t dest);
-     
+
 /*
  * mat4_transpose
  * Transposes a mat4_t (flips the values over the diagonal)
@@ -393,7 +828,7 @@ mat4_t mat4_transpose(mat4_t mat, mat4_t dest);
  * Returns:
  * determinant of mat
  */
-double mat4_determinant(mat4_t mat);
+numeric_t mat4_determinant(mat4_t mat);
 
 /*
  * mat4_inverse
@@ -475,7 +910,7 @@ mat4_t mat4_multiply(mat4_t mat, mat4_t mat2, mat4_t dest);
  * Returns:
  * dest if not NULL, vec otherwise
  */
-mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest);
+vec3_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, vec3_t dest);
 
 /*
  * mat4_multiplyVec4
@@ -489,7 +924,7 @@ mat4_t mat4_multiplyVec3(mat4_t mat, vec3_t vec, mat4_t dest);
  * Returns:
  * dest if not NULL, vec otherwise
  */
-mat4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, mat4_t dest);
+vec4_t mat4_multiplyVec4(mat4_t mat, vec4_t vec, vec4_t dest);
 
 /*
  * mat4_translate
@@ -520,6 +955,20 @@ mat4_t mat4_translate(mat4_t mat, vec3_t vec, mat4_t dest);
 mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest);
 
 /*
+ * mat4_scale_scalar
+ * Scales a matrix by the given scalar
+ *
+ * Params:
+ * mat - mat4_t to scale
+ * scalar - scalar specifying the scale for each axis
+ * dest - Optional, mat4_t receiving operation result. If NULL, result is written to mat
+ *
+ * Returns:
+ * dest if not NULL, mat otherwise
+ */
+mat4_t mat4_scale_scalar(mat4_t mat, numeric_t scalar, mat4_t dest);
+
+/*
  * mat4_rotate
  * Rotates a matrix by the given angle around the specified axis
  * If rotating around a primary axis (X,Y,Z) one of the specialized rotation functions should be used instead for performance
@@ -527,13 +976,13 @@ mat4_t mat4_scale(mat4_t mat, vec3_t vec, mat4_t dest);
  * Params:
  * mat - mat4_t to rotate
  * angle - angle (in radians) to rotate
- * axis - vec3_t representing the axis to rotate around 
+ * axis - vec3_t representing the axis to rotate around
  * dest - Optional, mat4_t receiving operation result. If NULL, result is written to mat
  *
  * Returns:
  * dest if not NULL, mat otherwise
  */
-mat4_t mat4_rotate(mat4_t mat, double angle, vec3_t axis, mat4_t dest);
+mat4_t mat4_rotate(mat4_t mat, numeric_t angle, vec3_t axis, mat4_t dest);
 
 /*
  * mat4_rotateX
@@ -547,7 +996,7 @@ mat4_t mat4_rotate(mat4_t mat, double angle, vec3_t axis, mat4_t dest);
  * Returns:
  * dest if not NULL, mat otherwise
  */
-mat4_t mat4_rotateX(mat4_t mat, double angle, mat4_t dest);
+mat4_t mat4_rotateX(mat4_t mat, numeric_t angle, mat4_t dest);
 
 /*
  * mat4_rotateY
@@ -561,7 +1010,7 @@ mat4_t mat4_rotateX(mat4_t mat, double angle, mat4_t dest);
  * Returns:
  * dest if not NULL, mat otherwise
  */
-mat4_t mat4_rotateY(mat4_t mat, double angle, mat4_t dest);
+mat4_t mat4_rotateY(mat4_t mat, numeric_t angle, mat4_t dest);
 
 /*
  * mat4_rotateZ
@@ -575,7 +1024,7 @@ mat4_t mat4_rotateY(mat4_t mat, double angle, mat4_t dest);
  * Returns:
  * dest if not NULL, mat otherwise
  */
-mat4_t mat4_rotateZ(mat4_t mat, double angle, mat4_t dest);
+mat4_t mat4_rotateZ(mat4_t mat, numeric_t angle, mat4_t dest);
 
 /*
  * mat4_frustum
@@ -590,14 +1039,14 @@ mat4_t mat4_rotateZ(mat4_t mat, double angle, mat4_t dest);
  * Returns:
  * dest if not NULL, a new mat4_t otherwise
  */
-mat4_t mat4_frustum(double left, double right, double bottom, double top, double near, double far, mat4_t dest);
+mat4_t mat4_frustum(numeric_t left, numeric_t right, numeric_t bottom, numeric_t top, numeric_t near, numeric_t far, mat4_t dest);
 
 /*
  * mat4_perspective
  * Generates a perspective projection matrix with the given bounds
  *
  * Params:
- * fovy - scalar, vertical field of view
+ * fovy - scalar, vertical field of view (in degrees)
  * aspect - scalar, aspect ratio. typically viewport width/height
  * near, far - scalar, near and far bounds of the frustum
  * dest - Optional, mat4_t frustum matrix will be written into
@@ -605,7 +1054,7 @@ mat4_t mat4_frustum(double left, double right, double bottom, double top, double
  * Returns:
  * dest if not NULL, a new mat4_t otherwise
  */
-mat4_t mat4_perspective(double fovy, double aspect, double near, double far, mat4_t dest);
+mat4_t mat4_perspective(numeric_t fovy, numeric_t aspect, numeric_t near, numeric_t far, mat4_t dest);
 
 /*
  * mat4_ortho
@@ -620,7 +1069,7 @@ mat4_t mat4_perspective(double fovy, double aspect, double near, double far, mat
  * Returns:
  * dest if not NULL, a new mat4_t otherwise
  */
-mat4_t mat4_ortho(double left, double right, double bottom, double top, double near, double far, mat4_t dest);
+mat4_t mat4_ortho(numeric_t left, numeric_t right, numeric_t bottom, numeric_t top, numeric_t near, numeric_t far, mat4_t dest);
 
 /*
  * mat4_lookAt
@@ -669,7 +1118,7 @@ mat4_t mat4_fromRotationTranslation(quat_t quat, vec3_t vec, mat4_t dest);
 void mat4_str(mat4_t mat, char *buffer);
 
 /*
- * quat - Quaternions 
+ * quat - Quaternions
  */
 
 /*
@@ -700,8 +1149,8 @@ quat_t quat_set(quat_t quat, quat_t dest);
 /*
  * quat_calculateW
  * Calculates the W component of a quat_t from the X, Y, and Z components.
- * Assumes that quaternion is 1 unit in length. 
- * Any existing W component will be ignored. 
+ * Assumes that quaternion is 1 unit in length.
+ * Any existing W component will be ignored.
  *
  * Params:
  * quat - quat_t to calculate W component of
@@ -721,7 +1170,7 @@ quat_t quat_calculateW(quat_t quat, quat_t dest);
  *
  * @return {number} Dot product of quat and quat2
  */
-double quat_dot(quat_t quat, quat_t quat2);
+numeric_t quat_dot(quat_t quat, quat_t quat2);
 
 /*
  * quat_inverse
@@ -759,7 +1208,7 @@ quat_t quat_conjugate(quat_t quat, quat_t dest);
  * Returns:
  * Length of quat
  */
-double quat_length(quat_t quat);
+numeric_t quat_length(quat_t quat);
 
 /*
  * quat_normalize
@@ -842,7 +1291,26 @@ quat_t quat_toMat4(quat_t quat, mat4_t dest);
  * Returns:
  * dest if not NULL, quat otherwise
  */
-quat_t quat_slerp(quat_t quat, quat_t quat2, double slerp, quat_t dest);
+quat_t quat_slerp(quat_t quat, quat_t quat2, numeric_t slerp, quat_t dest);
+
+/*
+ * quat_rotate
+ * Rotates a point around a quaternion by applying the formula
+ *
+ *    r = q.p.q*
+ *
+ * where q is the quaternion, q* is its conjugate, and p is the
+ * point to be rotated.
+ *
+ * Params:
+ * quat - quat_t, first quaternion
+ * p - vec3_t, the point to rotate
+ * dest - Optional, quat_t receiving operation result. If NULL, result is written to quat
+ *
+ * Returns:
+ * dest if not NULL, quat otherwise
+ */
+quat_t quat_rotate(quat_t quat, vec3_t p, quat_t dest);
 
 /*
  * quat_str

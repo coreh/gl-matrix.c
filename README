@@ -1,3 +1,8 @@
+This was modified from Marco Buono's https://github.com/coreh/gl-matrix.c
+to add support for `vec2_t`, `vec4_t` and single header file library.
+
+The modifications are at https://github.com/wernsey/gl-matrix.c
+
 This is a fairly straightforward port of gl-matrix.js (https://github.com/toji/gl-matrix)
 from JavaScript to C.
 

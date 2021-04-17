@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 mat3_t mat3_create(mat3_t mat) {
-    mat3_t dest = calloc(sizeof(double), 9);
+    mat3_t dest = calloc(9, sizeof(numeric_t));
 
     if (mat) {
         dest[0] = mat[0];
@@ -51,7 +51,7 @@ mat3_t mat3_identity(mat3_t dest) {
 mat3_t mat3_transpose(mat3_t mat, mat3_t dest) {
     // If we are transposing ourselves we can skip a few steps but have to cache some values
     if (!dest || mat == dest) {
-        double a01 = mat[1], a02 = mat[2],
+        numeric_t a01 = mat[1], a02 = mat[2],
             a12 = mat[5];
 
         mat[1] = mat[3];
