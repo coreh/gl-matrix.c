@@ -4,7 +4,7 @@
 #include "gl-matrix.h"
 
 vec3_t vec3_create(vec3_t vec) {
-    vec3_t dest = calloc(sizeof(double_t), 3);
+    vec3_t dest = (vec3_t)calloc(sizeof(double_t), 3);
 
     if (vec) {
         dest[0] = vec[0];
@@ -181,7 +181,7 @@ vec3_t vec3_unproject(vec3_t vec, mat4_t view, mat4_t proj, vec4_t viewport, vec
     if (!dest) { dest = vec; }
 
     mat4_t m = mat4_create(NULL);
-    double *v = malloc(sizeof(double) * 4);
+    double *v = (double *)malloc(sizeof(double) * 4);
     
     v[0] = (vec[0] - viewport[0]) * 2.0 / viewport[2] - 1.0;
     v[1] = (vec[1] - viewport[1]) * 2.0 / viewport[3] - 1.0;
